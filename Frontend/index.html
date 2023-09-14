@@ -17,18 +17,26 @@
       <button id="searchButton">Search</button>
       <hr />
       <div id="searchType">
+        <label for="altRadio">Alt</label>
+        <input type="radio" id="altRadio" name="searchType" value="searchAll" />
+
         <label for="artistRadio">Artist</label>
         <input type="radio" id="artistRadio" name="searchType" value="artist" />
         <br />
         <label for="albumRadio">Albums</label>
-        <input type="radio" id="albumRadio" name="searchType" value="albums" />
+        <input
+          type="radio"
+          id="albumRadio"
+          name="searchType"
+          value="albums-with-artists-and-tracks"
+        />
         <br />
         <label for="trackRadio">Tracks på album</label>
         <input
           type="radio"
           id="trackRadio"
           name="searchType"
-          value="track"
+          value="tracks"
           checked
         />
       </div>

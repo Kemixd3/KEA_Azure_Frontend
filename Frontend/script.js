@@ -2,17 +2,16 @@ const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
 const artistRadio = document.getElementById("artistRadio");
 const albumRadio = document.getElementById("albumRadio");
+const altRadio = document.getElementById("altRadio");
 const trackRadio = document.getElementById("trackRadio");
 
 const resultsContainer = document.getElementById("resultsContainer");
 
 searchButton.addEventListener("click", () => {
   const searchTerm = searchInput.value.toLowerCase();
-  const searchType = artistRadio.checked
-    ? "artists"
-    : albumRadio.checked
-    ? "albums-with-artists-and-tracks"
-    : "tracks";
+  const searchType = document.querySelector(
+    'input[name="searchType"]:checked'
+  ).value;
 
   //Make GET request to your backend API
   fetch(`http://localhost:3000/search/${searchType}?query=${searchTerm}`)
@@ -37,10 +36,15 @@ function displayResults(results, searchType) {
 
       if (searchType === "tracks") {
         //Displaying our track information
-        li.textContent = `Id: ${result.track_id} ${result.track_title}: ${result.duration}`;
-      } else if (searchType === "artists") {
+        li.textContent = `Id: ${result.track_id}, Track name: ${result.track_title}: ${result.duration}`;
+      } else if (searchType === "artist") {
         //Display the artist information
         li.textContent = `Id: ${result.artist_id} Artist name: ${result.artist_name}, Birth date: ${result.birth_date}`;
+      } else if (searchType === "searchAll") {
+        li.textContent = `Type: "${result.entity_type}", id: ${result.id}, name: "${result.name}", date: "${result.duration}"`;
+
+        //Display the artist information
+        console.log("Works");
       } else if (searchType === "albums-with-artists-and-tracks") {
         //Display album information along with artists and tracks
         li.textContent = `Id: ${result.album_id} Album title: ${result.album_title}, Artists in album: ${result.artists}, Published: ${result.release_date}`;

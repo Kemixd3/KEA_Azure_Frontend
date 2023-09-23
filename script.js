@@ -14,7 +14,9 @@ searchButton.addEventListener("click", () => {
   ).value;
 
   //Make GET request to your backend API
-  fetch(`http://localhost:3000/search/${searchType}?query=${searchTerm}`)
+  fetch(
+    `https://schoolapi123.azurewebsites.net/search/${searchType}?query=${searchTerm}`
+  )
     .then((response) => response.json())
     .then((data) => {
       displayResults(data, searchType);

@@ -52,7 +52,8 @@ function displayResults(results, searchType) {
         console.log("Works");
       } else if (searchType === "albums-with-artists-and-tracks") {
         // Display album information along with artists and tracks
-        gridItem.textContent = `Album title: ${result.album_title}, Artists in album: ${result.artists}, Published: ${result.release_date}`;
+        console.log(result);
+        gridItem.textContent = `Album title: ${result.album_title}, Published: ${result.release_date}`;
 
         // Display related artists
         if (result.artists && result.artists.length > 0) {

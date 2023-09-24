@@ -26,6 +26,12 @@ searchButton.addEventListener("click", async () => {
     });
 });
 
+function formatBirthDate(birthDate) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = new Date(birthDate).toLocaleDateString(undefined, options);
+  return formattedDate;
+}
+
 function zipArrays(array1, array2) {
   const zipped = [];
 
@@ -57,14 +63,15 @@ function displayResults(results, searchType) {
         gridItem.textContent = `Track name: ${result.track_title}: ${result.duration}`;
       } else if (searchType === "artist") {
         // Display the artist information
-        gridItem.textContent = `Artist name: ${result.artist_name}, Birth date: ${result.birth_date}`;
+
+        gridItem.textContent = `Artist name: ${result.artist_name}, Birth date: ${formatBirthDate(result.birth_date)}`;
       } else if (searchType === "searchAll") {
         gridItem.textContent = `Type: "${result.entity_type}", name: "${result.name}", date: "${result.duration}"`;
 
         // Display the artist information
       } else if (searchType === "albums-with-artists-and-tracks") {
         // Display album information along with artists and tracks
-        gridItem.textContent = `Album title: ${result.album_title}, Published: ${result.release_date}, Artist: ${result.artists[0].artist_name}`;
+        gridItem.textContent = `Album title: ${result.album_title}, Published: ${formatBirthDate(result.release_date)}, Artist: ${result.artists[0].artist_name}`;
 
         const zippedData = zipArrays(result.artists, result.tracks);
           const artistsUl = document.createElement("dl");

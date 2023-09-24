@@ -67,12 +67,11 @@ function displayResults(results, searchType) {
         gridItem.textContent = `Album title: ${result.album_title}, Published: ${result.release_date}, Artist: ${result.artists[0].artist_name}`;
 
         const zippedData = zipArrays(result.artists, result.tracks);
-
           const artistsUl = document.createElement("dl");
           const artistHeader = document.createElement("dt");
           artistHeader.textContent = "Songs:";
           artistsUl.appendChild(artistHeader);
-          zippedData.forEach((data) => {
+          result.tracks.forEach((data) => {
             const artistLi = document.createElement("dd");
             artistLi.textContent = `Name: ${data.track_title}, Duration: ${data.duration},  Artist: mangler`;
             artistsUl.appendChild(artistLi);

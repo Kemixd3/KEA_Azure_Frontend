@@ -7,14 +7,14 @@ const trackRadio = document.getElementById("trackRadio");
 
 const resultsContainer = document.getElementById("resultsContainer");
 
-searchButton.addEventListener("click", () => {
+searchButton.addEventListener("click", async () => {
   const searchTerm = searchInput.value.toLowerCase();
   const searchType = document.querySelector(
     'input[name="searchType"]:checked'
   ).value;
 
   //Make GET request to your backend API
-  fetch(
+  await fetch(
     `https://schoolapi123.azurewebsites.net/search/${searchType}?query=${searchTerm}`
   )
     .then((response) => response.json())
@@ -25,6 +25,19 @@ searchButton.addEventListener("click", () => {
       console.error("Error fetching data:", error);
     });
 });
+
+function zipArrays(array1, array2) {
+  const zipped = [];
+
+  for (let i = 0; i < Math.min(array1.length, array2.length); i++) {
+    zipped.push({
+      ...array1[i], // Assuming array1 contains objects
+      ...array2[i]  // Assuming array2 contains objects
+    });
+  }
+
+  return zipped;
+}
 
 function displayResults(results, searchType) {
   clearResults();
@@ -53,35 +66,20 @@ function displayResults(results, searchType) {
         // Display album information along with artists and tracks
         gridItem.textContent = `Album title: ${result.album_title}, Published: ${result.release_date}`;
 
-        // Display related artists
-        if (result.artists && result.artists.length > 0) {
+        const zippedData = zipArrays(result.artists, result.tracks);
+        console.log(zippedData);
+
           const artistsUl = document.createElement("dl");
           const artistHeader = document.createElement("dt");
-          artistHeader.textContent = "Artists:";
+          artistHeader.textContent = "Songs:";
           artistsUl.appendChild(artistHeader);
-
-          result.artists.forEach((artist) => {
+          zippedData.forEach((data) => {
             const artistLi = document.createElement("dd");
-            artistLi.textContent = `Artist: ${artist.artist_name}`;
+            artistLi.textContent = `Name: ${data.track_title}, Duration: ${data.duration},  Artist: ${data.artist_name}`;
             artistsUl.appendChild(artistLi);
           });
           gridItem.appendChild(artistsUl);
-        }
-
-        // Display the related tracks
-        if (result.tracks && result.tracks.length > 0) {
-          const tracksUl = document.createElement("dl");
-          const trackHeader = document.createElement("dt");
-          trackHeader.textContent = "Tracks:";
-
-          tracksUl.appendChild(trackHeader);
-          result.tracks.forEach((track) => {
-            const trackLi = document.createElement("dd");
-            trackLi.textContent = `Track: ${track.track_title}, Duration: ${track.duration}`;
-            tracksUl.appendChild(trackLi);
-          });
-          gridItem.appendChild(tracksUl);
-        }
+        
       }
 
       gridContainer.appendChild(gridItem);

@@ -64,10 +64,9 @@ function displayResults(results, searchType) {
         // Display the artist information
       } else if (searchType === "albums-with-artists-and-tracks") {
         // Display album information along with artists and tracks
-        gridItem.textContent = `Album title: ${result.album_title}, Published: ${result.release_date}`;
+        gridItem.textContent = `Album title: ${result.album_title}, Published: ${result.release_date}, Artist: ${result.artists[0].artist_name}`;
 
         const zippedData = zipArrays(result.artists, result.tracks);
-        console.log(zippedData);
 
           const artistsUl = document.createElement("dl");
           const artistHeader = document.createElement("dt");
@@ -75,7 +74,7 @@ function displayResults(results, searchType) {
           artistsUl.appendChild(artistHeader);
           zippedData.forEach((data) => {
             const artistLi = document.createElement("dd");
-            artistLi.textContent = `Name: ${data.track_title}, Duration: ${data.duration},  Artist: ${data.artist_name}`;
+            artistLi.textContent = `Name: ${data.track_title}, Duration: ${data.duration},  Artist: mangler`;
             artistsUl.appendChild(artistLi);
           });
           gridItem.appendChild(artistsUl);

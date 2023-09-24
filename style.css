@@ -7,26 +7,29 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
+    overflow-y: hidden;
 
-.container {
+  }
+  
+  .container {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     animation: slideIn 1s ease-in-out;
-}
-
-input[type="text"] {
+    overflow-y: hidden;
+  }
+  
+  input[type="text"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 90%;
     margin-bottom: 10px;
-}
-
-button {
+  }
+  
+  button {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -34,29 +37,45 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-button:hover {
+  }
+  
+  button:hover {
     background-color: #0056b3;
-}
-
-label {
+  }
+  
+  label {
     display: inline-block;
     margin-right: 10px;
-}
- 
-.searchBar {
+  }
+  
+  .searchBar {
     width: 15px;
-}
-
-
-@keyframes slideIn {
-    0% {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
+  }
+  
+/* Update the CSS for the grid-container */
+.grid-container {
+    max-height: 400px; /* Set a fixed height for the container; adjust as needed */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds the container's height */
+    overflow-x: hidden; /* Hide horizontal scrollbar (if any) */
+    white-space: nowrap; /* Prevent items from wrapping to the next line */
+  }
+  
+  /* Add CSS for the inner grid */
+  .inner-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Display three items per row */
+    gap: 10px; /* Adjust the gap between grid items */
+    /* Remove padding for the inner grid, or adjust as needed */
+  }
+  
+  /* Add CSS for the grid items */
+  .grid-item {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    width: 100%; /* Ensure each grid item takes up the full width of its container */
+  }
+  

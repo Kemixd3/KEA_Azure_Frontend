@@ -66,7 +66,7 @@ function displayResults(results, searchType) {
 
         gridItem.textContent = `Artist name: ${result.artist_name}, Birth date: ${formatBirthDate(result.birth_date)}`;
       } else if (searchType === "searchAll") {
-        gridItem.textContent = `Type: "${result.entity_type}", name: "${result.name}", date: "${result.duration}"`;
+        gridItem.textContent = `Type: "${result.entity_type}", name: "${result.name}", date: "${formatBirthDate(result.duration)}"`;
 
         // Display the artist information
       } else if (searchType === "albums-with-artists-and-tracks") {

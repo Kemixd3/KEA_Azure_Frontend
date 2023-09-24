@@ -49,17 +49,19 @@ function displayResults(results, searchType) {
         gridItem.textContent = `Type: "${result.entity_type}", name: "${result.name}", date: "${result.duration}"`;
 
         // Display the artist information
-        console.log("Works");
       } else if (searchType === "albums-with-artists-and-tracks") {
         // Display album information along with artists and tracks
-        console.log(result);
         gridItem.textContent = `Album title: ${result.album_title}, Published: ${result.release_date}`;
 
         // Display related artists
         if (result.artists && result.artists.length > 0) {
-          const artistsUl = document.createElement("ul");
+          const artistsUl = document.createElement("dl");
+          const artistHeader = document.createElement("dt");
+          artistHeader.textContent = "Artists:";
+          artistsUl.appendChild(artistHeader);
+
           result.artists.forEach((artist) => {
-            const artistLi = document.createElement("li");
+            const artistLi = document.createElement("dd");
             artistLi.textContent = `Artist: ${artist.artist_name}`;
             artistsUl.appendChild(artistLi);
           });
@@ -68,10 +70,14 @@ function displayResults(results, searchType) {
 
         // Display the related tracks
         if (result.tracks && result.tracks.length > 0) {
-          const tracksUl = document.createElement("ul");
+          const tracksUl = document.createElement("dl");
+          const trackHeader = document.createElement("dt");
+          trackHeader.textContent = "Tracks:";
+
+          tracksUl.appendChild(trackHeader);
           result.tracks.forEach((track) => {
-            const trackLi = document.createElement("li");
-            trackLi.textContent = `Track: ${track.track_title}`;
+            const trackLi = document.createElement("dd");
+            trackLi.textContent = `Track: ${track.track_title}, Duration: ${track.duration}`;
             tracksUl.appendChild(trackLi);
           });
           gridItem.appendChild(tracksUl);

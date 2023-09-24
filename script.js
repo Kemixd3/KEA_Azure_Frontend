@@ -32,26 +32,29 @@ function displayResults(results, searchType) {
   if (results.length === 0) {
     resultsContainer.innerHTML = "<p>No results found.</p>";
   } else {
-    const ul = document.createElement("ul");
+    const gridContainer = document.createElement("div");
+    gridContainer.classList.add("grid-container");
+
     results.forEach((result) => {
-      const li = document.createElement("li");
+      const gridItem = document.createElement("div");
+      gridItem.classList.add("grid-item");
 
       if (searchType === "tracks") {
-        //Displaying our track information
-        li.textContent = `Id: ${result.track_id}, Track name: ${result.track_title}: ${result.duration}`;
+        // Displaying track information
+        gridItem.textContent = `Track name: ${result.track_title}: ${result.duration}`;
       } else if (searchType === "artist") {
-        //Display the artist information
-        li.textContent = `Id: ${result.artist_id} Artist name: ${result.artist_name}, Birth date: ${result.birth_date}`;
+        // Display the artist information
+        gridItem.textContent = `Artist name: ${result.artist_name}, Birth date: ${result.birth_date}`;
       } else if (searchType === "searchAll") {
-        li.textContent = `Type: "${result.entity_type}", id: ${result.id}, name: "${result.name}", date: "${result.duration}"`;
+        gridItem.textContent = `Type: "${result.entity_type}", name: "${result.name}", date: "${result.duration}"`;
 
-        //Display the artist information
+        // Display the artist information
         console.log("Works");
       } else if (searchType === "albums-with-artists-and-tracks") {
-        //Display album information along with artists and tracks
-        li.textContent = `Id: ${result.album_id} Album title: ${result.album_title}, Artists in album: ${result.artists}, Published: ${result.release_date}`;
+        // Display album information along with artists and tracks
+        gridItem.textContent = `Album title: ${result.album_title}, Artists in album: ${result.artists}, Published: ${result.release_date}`;
 
-        //Display related artists
+        // Display related artists
         if (result.artists && result.artists.length > 0) {
           const artistsUl = document.createElement("ul");
           result.artists.forEach((artist) => {
@@ -59,10 +62,10 @@ function displayResults(results, searchType) {
             artistLi.textContent = `Artist: ${artist.artist_name}`;
             artistsUl.appendChild(artistLi);
           });
-          li.appendChild(artistsUl);
+          gridItem.appendChild(artistsUl);
         }
 
-        //Display the related tracks
+        // Display the related tracks
         if (result.tracks && result.tracks.length > 0) {
           const tracksUl = document.createElement("ul");
           result.tracks.forEach((track) => {
@@ -70,16 +73,19 @@ function displayResults(results, searchType) {
             trackLi.textContent = `Track: ${track.track_title}`;
             tracksUl.appendChild(trackLi);
           });
-          li.appendChild(tracksUl);
+          gridItem.appendChild(tracksUl);
         }
       }
 
-      ul.appendChild(li);
+      gridContainer.appendChild(gridItem);
     });
-    resultsContainer.appendChild(ul);
+
+    resultsContainer.appendChild(gridContainer);
   }
 }
+
 
 function clearResults() {
   resultsContainer.innerHTML = "";
 }
+

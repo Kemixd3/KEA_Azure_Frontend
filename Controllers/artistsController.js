@@ -1,5 +1,5 @@
 import artistModel from "../Models/artistModel.js";
-import { ArtistRenderer } from "../Renderers/ArtistRenderer.js";
+import ArtistRenderer from "../Renderers/ArtistRenderer.js";
 
 const endpoint = "https://keamusicapi.azurewebsites.net/";
 
@@ -42,20 +42,8 @@ async function readAllArtists(searchTerm) {
   }
 
   allArtists = artistsData.map((jsonObj) => new artistModel(jsonObj));
-  renderArtistsInHTML(allArtists);
-}
-
-function renderArtistsInHTML(artists) {
-  const artistList = document.getElementById("resultsContainer");
-
-  // Clear previous results
-  artistList.innerHTML = "";
-
-  // Render each artist in the artist list
-  artists.forEach((artist) => {
-    const artistHTML = ArtistRenderer.render(artist);
-    artistList.insertAdjacentHTML("beforeend", artistHTML);
-  });
+  return allArtists;
+  //renderArtistsInHTML(allArtists);
 }
 
 // ----- Create new artist ----- //
@@ -95,4 +83,10 @@ async function deleteArtist(artist) {
   return res.ok;
 }
 
-export { createArtist, readAllArtists, updateArtist, deleteArtist, showCreateArtist };
+export {
+  createArtist,
+  readAllArtists,
+  updateArtist,
+  deleteArtist,
+  showCreateArtist,
+};

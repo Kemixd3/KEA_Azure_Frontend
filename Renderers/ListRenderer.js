@@ -1,15 +1,26 @@
-// Type: "${result.entity_type}", name: "${result.name}", date: "${formatBirthDate(result.duration)}
+export default class ListRenderer {
+  constructor(list, container, itemRenderer) {
+    this.itemRenderer = itemRenderer;
+    if (container instanceof Element) {
+      this.container = container;
+    } else if (container) {
+      this.container = document.querySelector(container);
+    } else {
+      alert("Something went wrong");
+      //console.log(container);
+    }
+    this.list = list.map((item) => new this.itemRenderer(item));
+  }
 
-function construct(list, container, itemRenderer) {
-  const ListRenderer = {
-    container: document.querySelector(container),
-    render() {
-      for (const item of list) {
-        const html = itemRenderer.render(item);
-        this.container.insertAdjacentHTML("beforeend", html);
+  render() {
+    this.container.innerHTML = "";
+    for (const itemRenderer of this.list) {
+      const html = itemRenderer.render();
+      this.container.insertAdjacentHTML("beforeend", html);
+      if (itemRenderer.postRender) {
+        const element = this.container.lastElementChild;
+        itemRenderer.postRender(element);
       }
-    },
-  };
-  return ListRenderer;
+    }
+  }
 }
-export { construct };

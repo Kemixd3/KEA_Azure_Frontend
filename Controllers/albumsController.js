@@ -1,5 +1,4 @@
 import albumModel from "../Models/albumModel.js";
-import { AlbumRenderer } from "../Renderers/AlbumRenderer.js";
 
 const endpoint = "https://keamusicapi.azurewebsites.net/";
 
@@ -52,21 +51,8 @@ async function readAllAlbums(searchTerm) {
   }
 
   allAlbums = albumsData.map((jsonObj) => new albumModel(jsonObj));
-  renderAlbumsInHTML(allAlbums);
-}
 
-function renderAlbumsInHTML(albums) {
-  const albumList =  document.getElementById("resultsContainer");
-
-
-  // Clear previous results
-  albumList.innerHTML = "";
-
-  // Render each album in the album list
-  albums.forEach((album) => {
-    const albumHTML = AlbumRenderer.render(album);
-    albumList.insertAdjacentHTML("beforeend", albumHTML);
-  });
+  return allAlbums;
 }
 
 // ----- Create new album ----- //
@@ -106,4 +92,10 @@ async function deleteAlbum(album) {
   return res.ok;
 }
 
-export { createAlbum, readAllAlbums, updateAlbum, deleteAlbum, showCreateAlbum };
+export {
+  createAlbum,
+  readAllAlbums,
+  updateAlbum,
+  deleteAlbum,
+  showCreateAlbum,
+};

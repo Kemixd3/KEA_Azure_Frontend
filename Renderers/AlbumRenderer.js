@@ -1,21 +1,17 @@
-function formatBirthDate(birthDate) {
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  const formattedDate = new Date(birthDate).toLocaleDateString(
-    undefined,
-    options
-  );
-  return formattedDate;
-}
+import formatBirthDate from "../Services/dateService.js";
 
-const AlbumRenderer = {
-  render(album) {
-    const albumHTML = /*html*/ `
+export default class AlbumRenderer {
+  constructor(item) {
+    this.item = item;
+  }
+  render() {
+    const albumHTML = `
       <ul type ="none">
-        <li>Album title: ${album.name}, Published: ${formatBirthDate(album.date)}</li>
+        <li>Album title: ${this.item.name}, Published: ${formatBirthDate(
+      this.item.date
+    )}</li>
       </ul>
       `;
     return albumHTML;
-  },
-};
-
-export { AlbumRenderer };
+  }
+}

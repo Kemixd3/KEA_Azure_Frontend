@@ -1,5 +1,4 @@
 import trackModel from "../Models/trackModel.js";
-import { TrackRenderer } from "../Renderers/TrackRenderer.js";
 
 const endpoint = "https://keamusicapi.azurewebsites.net/";
 
@@ -52,22 +51,9 @@ async function readAllTracks(searchTerm) {
   }
 
   allTracks = tracksData.map((jsonObj) => new trackModel(jsonObj));
-  renderTracksInHTML(allTracks);
+
+  return allTracks;
 }
-
-function renderTracksInHTML(tracks) {
-  const innerGrid = document.getElementById("resultsContainer");
-
-  // Clear previous results
-  innerGrid.innerHTML = "";
-
-  // Render each track in the inner grid
-  tracks.forEach((track) => {
-    const trackHTML = TrackRenderer.render(track);
-    innerGrid.insertAdjacentHTML("beforeend", trackHTML);
-  });
-}
-
 
 // ----- Create new track ----- //
 async function createTrack(track) {
@@ -106,4 +92,10 @@ async function deleteTrack(track) {
   return res.ok;
 }
 
-export { createTrack, readAllTracks, updateTrack, deleteTrack, showCreateTrack };
+export {
+  createTrack,
+  readAllTracks,
+  updateTrack,
+  deleteTrack,
+  showCreateTrack,
+};

@@ -1,4 +1,4 @@
-import albumModel from "../models/albumModel.js";
+import albumModel from "../Models/albumModel.js";
 
 const endpoint = "http://localhost:8000"; //
 

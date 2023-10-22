@@ -1,7 +1,7 @@
 import albumModel from "../Models/albumModel.js";
 import { AlbumRenderer } from "./AlbumRenderer.js";
 
-const endpoint = "http://localhost:8000";
+const endpoint = "https://keamusicapi.azurewebsites.net/";
 
 let allAlbums = [];
 

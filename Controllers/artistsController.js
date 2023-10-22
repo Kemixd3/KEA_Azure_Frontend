@@ -1,7 +1,7 @@
 import artistModel from "../Models/artistModel.js";
 import { ArtistRenderer } from "./ArtistRenderer.js";
 
-const endpoint = "http://localhost:8000";
+const endpoint = "https://keamusicapi.azurewebsites.net/";
 
 let allArtists = [];
 

@@ -1,7 +1,7 @@
 import trackModel from "../Models/trackModel.js";
 import { TrackRenderer } from "./TrackRenderer.js";
 
-const endpoint = "http://localhost:8000";
+const endpoint = "https://keamusicapi.azurewebsites.net/";
 
 let allTracks = [];
 

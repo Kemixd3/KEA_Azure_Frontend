@@ -1,51 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Music Search</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <input
-      class="searchBar"
-      type="text"
-      id="searchInput"
-      placeholder="Search..."
-    />
-    <button id="searchButton">Search</button>
-    <hr />
-    <div id="searchType">
-      <label for="altRadio" class="square">Alt</label>
-      <input type="radio" id="altRadio" name="searchType" value="searchAll" />
-      <br>
-      <label for="artistRadio" class="square">Artists</label>
-      <input type="radio" id="artistRadio" name="searchType" value="artist" />
-      <br>
-      <label for="albumRadio" class="square">Albums</label>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Search</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
       <input
-        type="radio"
-        id="albumRadio"
-        name="searchType"
-        value="albums-with-artists-and-tracks"
+        class="searchBar"
+        type="text"
+        id="searchInput"
+        placeholder="Search..."
       />
-      <br>
-      <label for="trackRadio" class="square">Tracks</label>
-      <input
-        type="radio"
-        id="trackRadio"
-        name="searchType"
-        value="tracks"
-        checked
-      />
+      <button id="searchButton">Search</button>
       <hr />
-
+      <div id="searchType">
+        <label for="artistRadio" class="square">Artists</label>
+        <input
+          type="radio"
+          id="artistRadio"
+          name="searchType"
+          value="artist"
+          checked
+        />
+        <br />
+        <label for="albumRadio" class="square">Albums</label>
+        <input
+          type="radio"
+          id="albumRadio"
+          name="searchType"
+          value="albums-with-artists-and-tracks"
+        />
+        <br />
+        <label for="trackRadio" class="square">Tracks</label>
+        <input type="radio" id="trackRadio" name="searchType" value="tracks" />
+        <hr />
+      </div>
+      <div id="resultsContainer" class="grid-container">
+        <div class="inner-grid"></div>
+      </div>
     </div>
-    <div id="resultsContainer" class="grid-container">  <div class="inner-grid"></div>
-  </div>
-  </div>
-
-  <script type="text/javascript" src="script.js"></script>
-</body>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>

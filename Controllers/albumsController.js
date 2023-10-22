@@ -1,12 +1,12 @@
-import albumModel from "../models/albumModel.js";
+import albumModel from "../Models/albumModel.js";
 
-const endpoint = "http://localhost:8000"; //
+const endpoint = "https://keamusicapi.azurewebsites.net/";
 
 let allAlbums = [];
 
 async function showCreateAlbum() {
   const dialog = document.querySelector("#create-album-dialog");
-  const artists = await readAllArtists();
+  const artists = await readAllArtists(); // Implement readAllArtists function
   for (const artist of artists) {
     document
       .querySelector("#album-create-select")
@@ -28,23 +28,30 @@ async function createAlbumClicked(event) {
   event.preventDefault();
   const form = this;
   const album = {
-    name: form.title.value,
-    releaseDate: form.date.value,
-    image: form.image.value,
+    name: form.name.value,
     artistId: Number(form.artists.value),
+    releaseDate: form.releaseDate.value,
+    // Add more album properties as needed
   };
-  console.log(album);
   const response = await createAlbum(album);
   if (response) {
-    await displayUpdatedLists();
+    await displayUpdatedLists(); // Implement displayUpdatedLists function
   }
 }
 
 // ----- Read all albums ---- //
-async function readAllAlbums() {
-  const res = await fetch(`${endpoint}/albums`);
-  const albumsData = await res.json();
+async function readAllAlbums(searchTerm) {
+  let albumsData;
+  if (searchTerm === "") {
+    const res = await fetch(`${endpoint}/albums`);
+    albumsData = await res.json();
+  } else {
+    const res = await fetch(`${endpoint}/search/albums?query=${searchTerm}`);
+    albumsData = await res.json();
+  }
+
   allAlbums = albumsData.map((jsonObj) => new albumModel(jsonObj));
+
   return allAlbums;
 }
 
@@ -77,14 +84,18 @@ async function updateAlbum(album) {
 }
 
 // ----- Delete album ----- //
-async function deleteAlbum(albums) {
-  const res = await fetch(`${endpoint}/albums/${albums.id}`, {
+async function deleteAlbum(album) {
+  const res = await fetch(`${endpoint}/albums/${album.id}`, {
     method: "DELETE",
   });
 
   return res.ok;
 }
 
-export { createArtist, readAllAlbums, createAlbum, updateAlbum, deleteAlbum };
-
-export { showCreateAlbum };
+export {
+  createAlbum,
+  readAllAlbums,
+  updateAlbum,
+  deleteAlbum,
+  showCreateAlbum,
+};

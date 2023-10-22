@@ -1,10 +1,8 @@
 export default class Album {
   constructor(obj) {
-    this.name = obj.name;
-    this.id = obj.id;
-    this.releaseDate = obj.releaseDate;
-    this.image = obj.image;
-    this.artists = obj.artists;
+    this.name = obj.album_title;
+    this.id = obj.albumId;
+    this.date = obj.release_date;
     Object.defineProperty(this, "id", { writable: false });
   }
 }

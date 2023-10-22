@@ -37,7 +37,7 @@ async function readAllArtists(searchTerm) {
     const res = await fetch(`${endpoint}/artists`);
     artistsData = await res.json();
   } else {
-    const res = await fetch(`${endpoint}/search/artists:${searchTerm}`);
+    const res = await fetch(`${endpoint}/search/artist?query=${searchTerm}`);
     artistsData = await res.json();
   }
 
@@ -47,7 +47,6 @@ async function readAllArtists(searchTerm) {
 
 function renderArtistsInHTML(artists) {
   const artistList = document.getElementById("resultsContainer");
-
 
   // Clear previous results
   artistList.innerHTML = "";

@@ -47,7 +47,7 @@ async function readAllTracks(searchTerm) {
     const res = await fetch(`${endpoint}/tracks`);
     tracksData = await res.json();
   } else {
-    const res = await fetch(`${endpoint}/search/tracks:${searchTerm}`);
+    const res = await fetch(`${endpoint}/search/tracks?query=${searchTerm}`);
     tracksData = await res.json();
   }
 

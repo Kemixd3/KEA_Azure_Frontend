@@ -34,7 +34,6 @@ async function createAlbumClicked(event) {
     releaseDate: form.releaseDate.value,
     // Add more album properties as needed
   };
-  console.log(album);
   const response = await createAlbum(album);
   if (response) {
     await displayUpdatedLists(); // Implement displayUpdatedLists function
@@ -48,7 +47,7 @@ async function readAllAlbums(searchTerm) {
     const res = await fetch(`${endpoint}/albums`);
     albumsData = await res.json();
   } else {
-    const res = await fetch(`${endpoint}/search/albums:${searchTerm}`);
+    const res = await fetch(`${endpoint}/search/albums?query=${searchTerm}`);
     albumsData = await res.json();
   }
 

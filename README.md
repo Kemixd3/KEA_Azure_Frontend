@@ -1,8 +1,10 @@
 # KEA_Azure_Frontend project
-## [Link to KEA Azure Frontend](https://kemixd3.github.io/KEA_Azure_Frontend/)
-## [Github Page](https://kemixd3.github.io/KEA_Azure_Frontend/) 
-## [Link to backend repository](https://github.com/Kemixd3/SchoolAzure)
 
+## [Link to KEA Azure Frontend](https://kemixd3.github.io/KEA_Azure_Frontend/)
+
+## [Github Page](https://kemixd3.github.io/KEA_Azure_Frontend/)
+
+## [Link to backend repository](https://github.com/Kemixd3/SchoolAzure)
 
 ### List of Artists
 
@@ -13,10 +15,6 @@ Sort and filter by selecting the desired data:
 3. Search for albums by a specific artist.
 
 Enter your query in the search bar and click "Search."
-
-## E/R Diagram of Database Relations
-
-![SchoolAzure Image](ERDiagram.png)
 
 ## Backend Usage [https://github.com/Kemixd3/SchoolAzure/tree/preprod]
 

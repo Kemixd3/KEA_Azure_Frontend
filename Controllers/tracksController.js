@@ -1,12 +1,13 @@
 import trackModel from "../Models/trackModel.js";
+import { TrackRenderer } from "./TrackRenderer.js";
 
-const endpoint = "http://localhost:8000"; //
+const endpoint = "http://localhost:8000";
 
 let allTracks = [];
 
 async function showCreateTrack() {
   const dialog = document.querySelector("#create-track-dialog");
-  const albums = await readAllAlbums(); // You may need to implement this function
+  const albums = await readAllAlbums(); // Implement readAllAlbums function
   for (const album of albums) {
     document
       .querySelector("#track-create-select")
@@ -36,17 +37,43 @@ async function createTrackClicked(event) {
   console.log(track);
   const response = await createTrack(track);
   if (response) {
-    await displayUpdatedLists(); // You may need to implement this function
+    await displayUpdatedLists(); // Implement displayUpdatedLists function
   }
 }
 
 // ----- Read all tracks ---- //
-async function readAllTracks() {
-  const res = await fetch(`${endpoint}/tracks`);
-  const tracksData = await res.json();
-  allTracks = tracksData.map((jsonObj) => new trackModel(jsonObj));
-  return allTracks;
+async function readAllTracks(searchTerm) {
+  if (searchTerm === "") {
+    const res = await fetch(`${endpoint}/tracks`);
+    const tracksData = await res.json();
+    allTracks = tracksData.map((jsonObj) => new trackModel(jsonObj));
+
+    // Render the tracks in the HTML
+    renderTracksInHTML(allTracks);
+  } else {
+    const res = await fetch(`${endpoint}/search/tracks:${searchTerm}`);
+    const tracksData = await res.json();
+    allTracks = tracksData.map((jsonObj) => new trackModel(jsonObj));
+
+    // Render the filtered tracks in the HTML
+    renderTracksInHTML(allTracks);
+  }
 }
+
+function renderTracksInHTML(tracks) {
+  const resultsContainer = document.getElementById("resultsContainer");
+  const innerGrid = document.querySelector(".inner-grid");
+
+  // Clear previous results
+  innerGrid.innerHTML = "";
+
+  // Render each track in the inner grid
+  tracks.forEach((track) => {
+    const trackHTML = TrackRenderer.render(track);
+    innerGrid.insertAdjacentHTML("beforeend", trackHTML);
+  });
+}
+
 
 // ----- Create new track ----- //
 async function createTrack(track) {
@@ -85,6 +112,4 @@ async function deleteTrack(track) {
   return res.ok;
 }
 
-export { createTrack, readAllTracks, updateTrack, deleteTrack };
-
-export { showCreateTrack };
+export { createTrack, readAllTracks, updateTrack, deleteTrack, showCreateTrack };

@@ -1,6 +1,7 @@
 import artistModel from "../Models/artistModel.js";
+import { ArtistRenderer } from "./ArtistRenderer.js";
 
-const endpoint = "http://localhost:8000"; //
+const endpoint = "http://localhost:8000";
 
 let allArtists = [];
 
@@ -26,16 +27,36 @@ async function createArtistClicked(event) {
   console.log(artist);
   const response = await createArtist(artist);
   if (response) {
-    await displayUpdatedLists();
+    await displayUpdatedLists(); // Implement displayUpdatedLists function
   }
 }
 
 // ----- Read all artists ---- //
-async function readAllArtists() {
-  const res = await fetch(`${endpoint}/artists`);
-  const artistsData = await res.json();
+async function readAllArtists(searchTerm) {
+  let artistsData;
+  if (searchTerm === "") {
+    const res = await fetch(`${endpoint}/artists`);
+    artistsData = await res.json();
+  } else {
+    const res = await fetch(`${endpoint}/search/artists:${searchTerm}`);
+    artistsData = await res.json();
+  }
+
   allArtists = artistsData.map((jsonObj) => new artistModel(jsonObj));
-  return allArtists;
+  renderArtistsInHTML(allArtists);
+}
+
+function renderArtistsInHTML(artists) {
+  const artistList = document.querySelector(".artist-list");
+
+  // Clear previous results
+  artistList.innerHTML = "";
+
+  // Render each artist in the artist list
+  artists.forEach((artist) => {
+    const artistHTML = ArtistRenderer.render(artist);
+    artistList.insertAdjacentHTML("beforeend", artistHTML);
+  });
 }
 
 // ----- Create new artist ----- //
@@ -75,6 +96,4 @@ async function deleteArtist(artist) {
   return res.ok;
 }
 
-export { createArtist, readAllArtists, updateArtist, deleteArtist };
-
-export { showCreateArtist };
+export { createArtist, readAllArtists, updateArtist, deleteArtist, showCreateArtist };

@@ -1,11 +1,6 @@
-//import * as ListRenderer from "./Renderers/ListRenderer.js";
-//import { ArtistRenderer } from "./Renderers/ArtistRenderer.js";
-//import { TrackRenderer } from "./Renderers/TrackRenderer.js";
-//import { AlbumRenderer } from "./Renderers/AlbumRenderer.js";
-
-import { albumsController } from "./Controllers/albumsController.js";
-import { readAllTracks } from "./Controllers/artistsController.js";
-import { tracksControllers } from "./Controllers/tracksController.js";
+import { readAllAlbums } from "./Controllers/albumsController.js";
+import { readAllArtists } from "./Controllers/artistsController.js";
+import { readAllTracks } from "./Controllers/tracksController.js";
 
 const resultsContainer = document.getElementById("resultsContainer");
 const searchInput = document.getElementById("searchInput");
@@ -24,10 +19,15 @@ searchButton.addEventListener("click", async () => {
   let searchType;
   if (artistRadio.checked) {
     searchType = artistRadio.value;
+    await readAllArtists(searchTerm);
+
   } else if (albumRadio.checked) {
     searchType = albumRadio.value;
+    await readAllAlbums(searchTerm);
+
   } else if (altRadio.checked) {
     searchType = altRadio.value;
+
   } else {
     searchType = trackRadio.value; 
     await readAllTracks(searchTerm);

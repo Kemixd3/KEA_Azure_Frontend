@@ -43,25 +43,20 @@ async function createTrackClicked(event) {
 
 // ----- Read all tracks ---- //
 async function readAllTracks(searchTerm) {
+  let tracksData;
   if (searchTerm === "") {
     const res = await fetch(`${endpoint}/tracks`);
-    const tracksData = await res.json();
-    allTracks = tracksData.map((jsonObj) => new trackModel(jsonObj));
-
-    // Render the tracks in the HTML
-    renderTracksInHTML(allTracks);
+    tracksData = await res.json();
   } else {
     const res = await fetch(`${endpoint}/search/tracks:${searchTerm}`);
-    const tracksData = await res.json();
-    allTracks = tracksData.map((jsonObj) => new trackModel(jsonObj));
-
-    // Render the filtered tracks in the HTML
-    renderTracksInHTML(allTracks);
+    tracksData = await res.json();
   }
+
+  allTracks = tracksData.map((jsonObj) => new trackModel(jsonObj));
+  renderTracksInHTML(allTracks);
 }
 
 function renderTracksInHTML(tracks) {
-  const resultsContainer = document.getElementById("resultsContainer");
   const innerGrid = document.querySelector(".inner-grid");
 
   // Clear previous results

@@ -2,7 +2,7 @@ const TrackRenderer = {
   render(track) {
     const trackHTML = /*html*/ `
       <ol type>
-        <li>${track.track_name}</li>
+        <li>Track name: ${track.track_title}: ${track.duration}</li>
       </ol>
       `;
     return trackHTML;

@@ -1,3 +1,5 @@
+// Type: "${result.entity_type}", name: "${result.name}", date: "${formatBirthDate(result.duration)}
+
 function construct(list, container, itemRenderer) {
   const ListRenderer = {
     container: document.querySelector(container),

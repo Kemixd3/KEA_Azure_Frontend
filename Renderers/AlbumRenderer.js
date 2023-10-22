@@ -11,8 +11,7 @@ const AlbumRenderer = {
   render(album) {
     const albumHTML = /*html*/ `
       <ul type ="none">
-        <li>
-        Album title: ${album.album_title}, Published: ${formatBirthDate(album.release_date)}, Artist: ${  album.artists[0].artist_name}</li>
+        <li>Album title: ${album.name}, Published: ${formatBirthDate(album.date)}</li>
       </ul>
       `;
     return albumHTML;

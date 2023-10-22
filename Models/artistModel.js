@@ -1,9 +1,9 @@
 export default class Artist {
   constructor(obj) {
-    this.name = obj.name;
-    this.id = obj.id;
-    this.image = obj.image;
-    this.website = obj.website;
+    this.name = obj.artist_name;
+    this.id = obj.artistID;
+    this.date = obj.birth_date;
+
 
     Object.defineProperty(this, "id", { writable: false });
   }

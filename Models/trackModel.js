@@ -1,9 +1,9 @@
 export default class Track {
   constructor(obj) {
-    this.id = obj.id;
-    this.name = obj.name;
+    this.id = obj.track_id;
+    this.name = obj.track_title;
     this.duration = obj.duration;
-    this.artists = obj.artists;
+    this.album_id = obj.album_id;
 
     Object.defineProperty(this, "id", { writable: false });
   }

@@ -11,7 +11,7 @@ const ArtistRenderer = {
   render(artist) {
     const artistHTML = /*html*/ `
       <ul type ="none">
-        <li>Artist name: ${artist.artist_name}, Birth date: ${formatBirthDate(artist.birth_date)}</li>
+        <li>Artist: ${artist.name}, Birth date: ${formatBirthDate(artist.date)}</li>
       </ul>
       `;
     return artistHTML;

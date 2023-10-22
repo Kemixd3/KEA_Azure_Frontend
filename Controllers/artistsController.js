@@ -1,5 +1,5 @@
 import artistModel from "../Models/artistModel.js";
-import { ArtistRenderer } from "./ArtistRenderer.js";
+import { ArtistRenderer } from "../Renderers/ArtistRenderer.js";
 
 const endpoint = "https://keamusicapi.azurewebsites.net/";
 
@@ -24,7 +24,6 @@ async function createArtistClicked(event) {
     genre: form.genre.value,
     // Add more artist properties as needed
   };
-  console.log(artist);
   const response = await createArtist(artist);
   if (response) {
     await displayUpdatedLists(); // Implement displayUpdatedLists function
@@ -47,7 +46,8 @@ async function readAllArtists(searchTerm) {
 }
 
 function renderArtistsInHTML(artists) {
-  const artistList = document.querySelector(".artist-list");
+  const artistList = document.getElementById("resultsContainer");
+
 
   // Clear previous results
   artistList.innerHTML = "";

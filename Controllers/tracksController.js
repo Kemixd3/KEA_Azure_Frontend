@@ -1,5 +1,5 @@
 import trackModel from "../Models/trackModel.js";
-import { TrackRenderer } from "./TrackRenderer.js";
+import { TrackRenderer } from "../Renderers/TrackRenderer.js";
 
 const endpoint = "https://keamusicapi.azurewebsites.net/";
 
@@ -34,7 +34,6 @@ async function createTrackClicked(event) {
     albumId: Number(form.albums.value),
     // Add more track properties as needed
   };
-  console.log(track);
   const response = await createTrack(track);
   if (response) {
     await displayUpdatedLists(); // Implement displayUpdatedLists function
@@ -57,7 +56,7 @@ async function readAllTracks(searchTerm) {
 }
 
 function renderTracksInHTML(tracks) {
-  const innerGrid = document.querySelector(".inner-grid");
+  const innerGrid = document.getElementById("resultsContainer");
 
   // Clear previous results
   innerGrid.innerHTML = "";

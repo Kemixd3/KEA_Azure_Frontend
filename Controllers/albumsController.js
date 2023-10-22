@@ -1,5 +1,5 @@
 import albumModel from "../Models/albumModel.js";
-import { AlbumRenderer } from "./AlbumRenderer.js";
+import { AlbumRenderer } from "../Renderers/AlbumRenderer.js";
 
 const endpoint = "https://keamusicapi.azurewebsites.net/";
 
@@ -57,7 +57,8 @@ async function readAllAlbums(searchTerm) {
 }
 
 function renderAlbumsInHTML(albums) {
-  const albumList = document.querySelector(".album-list");
+  const albumList =  document.getElementById("resultsContainer");
+
 
   // Clear previous results
   albumList.innerHTML = "";
